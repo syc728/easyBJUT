@@ -8,5 +8,5 @@ setup(
        name = "EasyBjut",
        options = options,
        zipfile = None,
-       console = [{"script": "v1.2.py" }]
+       console = [{"script": "easyBJUT.py" }]
        )
