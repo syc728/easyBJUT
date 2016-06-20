@@ -45,7 +45,7 @@ def login():
                         'txtUserName': studentNo,
                         'TextBox2': studentPass,
                         'txtSecretCode': secretCode,
-                        'RadioButtonList1': 'Ñ§Éú',
+                        'RadioButtonList1': 'Ñ§ï¿½ï¿½',
                         'Button1': '',
                         'lbLanguage': '',
                         'hidPdrs': '',
@@ -55,7 +55,7 @@ def login():
                 result = opener.open(request)
                 soup = BeautifulSoup(result.read(),"html.parser")
                 tmp = soup.find(id="xhxm")
-                #print tmp
+
                 studentName = str(tmp.string.decode('utf-8')[:-2])
                 graduURL1 = "http://gdjwgl.bjut.edu.cn/xscjcx.aspx?xh=" + studentNo + "&xm=" + studentName + "&gnmkdm=N121605"
                 referer = "http://gdjwgl.bjut.edu.cn/xs_main.aspx?xh=" + studentNo
@@ -73,7 +73,7 @@ def login():
                 postData_Gra = urllib.urlencode({
                         '__EVENTTARGET':'',
                         '__EVENTARGUMENT':'',
-                        'btn_zcj':'ÀúÄê³É¼¨',
+                        'btn_zcj':'å†å¹´æˆç»©',
                         '__VIEWSTATE':viewstate,
                         'hidLanguage': '',
                         'ddLXN':'',
@@ -90,21 +90,19 @@ def login():
 def writeIntoExcel():
         pageCode = login()
         # print pageCode
-        # Í¨¹ı½âÎöpageCodeÀ´Éú²ú½âÎöºóµÄ´úÂë£¬½âÎöºóµÄ´úÂëÓĞºÜ¶àÊôĞÔ£¬ºÍdomÀàËÆ£¬¹¹Ôìº¯ÊıµÄµÚ¶ş¸ö²ÎÊı¼û´úÂëÏê½â
+        
         soup = BeautifulSoup(pageCode, 'html.parser')
-        # ÕÒ³öµÚÒ»¸ötable±êÇ©
+
         table = soup.find("table", class_="datelist")
-        # ´´½¨Ò»¸öWorkbook¶ÔÏó£¬Õâ¾ÍÏàµ±ÓÚ´´½¨ÁËÒ»¸öExcelÎÄ¼ş£¬½«±àÂëÉèÖÃ³Éutf-8£¬¾Í¿ÉÒÔÔÚexcelÖĞÊä³öÖĞÎÄÁË¡£Ä¬ÈÏÊÇascii
-        # style_compression±íÊ¾Ñ¹Ëõ¸ñÊ½
+       
         book = xlwt.Workbook(encoding="utf-8", style_compression=0)
-        # ´´½¨Ò»¸ösheet¶ÔÏó£¬Ò»¸ösheet¶ÔÏó¶ÔÓ¦ExcelÎÄ¼şÖĞµÄÒ»ÕÅ±í¸ñ£¬ÕâÀïÎÒÃüÃûÎªmao£¬²¢ÇÒĞ´Èë¿É¸²¸Ç
         sheet = book.add_sheet("score", cell_overwrite_ok=True)
 
         trs = table.find("tr")
         tds = trs.find_all("td")
         #print tds
         col = 0
-        # ´æÈë±í¸ñµÚÒ»ĞĞ£¬¼´Ã¿Ò»ÁĞµÄËµÃ÷
+        
         for i in range(len(tds)):
             if i == 0 or i == 1 or i == 3:
                 sheet.write(0, col, tds[i].find('a').string.decode("utf-8"))
@@ -112,7 +110,7 @@ def writeIntoExcel():
             if i == 4 or i == 6 or i == 7 or i == 8 :
                 sheet.write(0, col, tds[i].string.decode("utf-8"))
                 col += 1
-        # ´æÈëÏêÏ¸³É¼¨
+
         row = 0
         trs = table.find_all("tr")
         for i in range(len(trs)):
@@ -122,12 +120,11 @@ def writeIntoExcel():
                 col = 0
                 for j in range(len(tds)):
                     if j == 0 or j == 1 or j == 3 or j == 4 or j == 6 or j == 7 or j == 8:
-                        #print tds[j].string.decode("utf-8")
                         sheet.write(row, col, tds[j].string.decode("utf-8"))
                         col += 1
-        # ×îºó£¬½«ÒÔÉÏ²Ù×÷±£´æµ½Ö¸¶¨µÄExcelÎÄ¼şÖĞ
+
         book.save("score.xls")
-        print "Ğ´ÈëEXCELÍê±Ï!"
+        print "å†™å…¥EXCELæˆåŠŸ!"
  
 def getV():
         try:
@@ -141,7 +138,7 @@ def getV():
                 return "Error"
 
 while True:
-        order = raw_input("Ñ¡Ïî£º")
+        order = raw_input("é€‰é¡¹ï¼š")
         if order=='1':
                 getC()
         else:
