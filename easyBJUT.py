@@ -45,7 +45,7 @@ def login():
                         'txtUserName': studentNo,
                         'TextBox2': studentPass,
                         'txtSecretCode': secretCode,
-                        'RadioButtonList1': 'ѧ��',
+                        'RadioButtonList1': '学生',
                         'Button1': '',
                         'lbLanguage': '',
                         'hidPdrs': '',
