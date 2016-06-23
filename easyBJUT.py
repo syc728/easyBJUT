@@ -45,7 +45,7 @@ def login():
                         'txtUserName': studentNo,
                         'TextBox2': studentPass,
                         'txtSecretCode': secretCode,
-                        'RadioButtonList1': '学生',
+                        'RadioButtonList1': 'ѧ��',
                         'Button1': '',
                         'lbLanguage': '',
                         'hidPdrs': '',
@@ -73,7 +73,7 @@ def login():
                 postData_Gra = urllib.urlencode({
                         '__EVENTTARGET':'',
                         '__EVENTARGUMENT':'',
-                        'btn_zcj':'历年成绩',
+                        'btn_zcj':'����ɼ�',
                         '__VIEWSTATE':viewstate,
                         'hidLanguage': '',
                         'ddLXN':'',
@@ -124,7 +124,7 @@ def writeIntoExcel():
                         col += 1
 
         book.save("score.xls")
-        print "写入EXCEL成功!"
+        print "EXCEL done!"
  
 def getV():
         try:
@@ -138,7 +138,7 @@ def getV():
                 return "Error"
 
 while True:
-        order = raw_input("选项：")
+        order = raw_input("option: ")
         if order=='1':
                 getC()
         else:
