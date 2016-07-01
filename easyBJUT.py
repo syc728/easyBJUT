@@ -6,6 +6,8 @@ import urllib2
 import urllib
 import cookielib
 import time
+import re
+import os
 
 reload(sys)
 sys.setdefaultencoding( "utf-8" )
@@ -54,8 +56,37 @@ def login():
                 request = urllib2.Request(baseUrl, postData, headers)
                 result = opener.open(request)
                 soup = BeautifulSoup(result.read(),"html.parser")
-                tmp = soup.find(id="xhxm")
+                error = soup.find_all('script')
+                source = error[1].get_text().encode("gbk")
+                
+                secret_error = "验证码不正确"
+                secret_res = source.find(secret_error)
 
+                if secret_res != -1:
+                        f = file("error.txt","w+")
+                        f.writelines(secret_error)
+                        f.close()
+                        os._exit(0)
+                
+                pass_error = "密码不正确"
+                pass_res = source.find(pass_error)
+
+                if pass_res != -1:
+                        f = file("error.txt","w+")
+                        f.writelines(pass_error)
+                        f.close()
+                        os._exit(0)
+
+                user_error = "用户名不存在"
+                user_res = source.find(user_error)
+
+                if user_res != -1:
+                        f = file("error.txt","w+")
+                        f.writelines(user_error)
+                        f.close()
+                        os._exit(0)
+                
+                tmp = soup.find(id="xhxm")                
                 studentName = str(tmp.string.decode('utf-8')[:-2])
                 graduURL1 = "http://gdjwgl.bjut.edu.cn/xscjcx.aspx?xh=" + studentNo + "&xm=" + studentName + "&gnmkdm=N121605"
                 referer = "http://gdjwgl.bjut.edu.cn/xs_main.aspx?xh=" + studentNo
@@ -107,7 +138,7 @@ def writeIntoExcel():
             if i == 0 or i == 1 or i == 3:
                 sheet.write(0, col, tds[i].find('a').string.decode("utf-8"))
                 col += 1
-            if i == 4 or i == 6 or i == 7 or i == 8 :
+            if i == 4 or i == 6 or i == 7 or i == 8 or i == 9:
                 sheet.write(0, col, tds[i].string.decode("utf-8"))
                 col += 1
 
@@ -119,7 +150,7 @@ def writeIntoExcel():
                 row += 1
                 col = 0
                 for j in range(len(tds)):
-                    if j == 0 or j == 1 or j == 3 or j == 4 or j == 6 or j == 7 or j == 8:
+                    if j == 0 or j == 1 or j == 3 or j == 4 or j == 6 or j == 7 or j == 8 or j == 9:
                         sheet.write(row, col, tds[j].string.decode("utf-8"))
                         col += 1
 
