@@ -67,8 +67,9 @@ def login():
                         f.writelines(secret_error)
                         f.close()
                         os._exit(0)
-                
-                pass_error = "ÃÜÂë²»ÕıÈ·"
+
+                print source
+                pass_error = "ÃÜÂë´íÎó"
                 pass_res = source.find(pass_error)
 
                 if pass_res != -1:
