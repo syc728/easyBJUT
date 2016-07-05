@@ -136,7 +136,7 @@ def writeIntoExcel():
         col = 0
         
         for i in range(len(tds)):
-            if i == 0 or i == 1 or i == 3:
+            if i == 0 or i == 1 or i == 2 or i == 3:
                 sheet.write(0, col, tds[i].find('a').string.decode("utf-8"))
                 col += 1
             if i == 4 or i == 6 or i == 7 or i == 8 or i == 9:
@@ -151,7 +151,7 @@ def writeIntoExcel():
                 row += 1
                 col = 0
                 for j in range(len(tds)):
-                    if j == 0 or j == 1 or j == 3 or j == 4 or j == 6 or j == 7 or j == 8 or j == 9:
+                    if j == 0 or j == 1 or j == 2or j == 3 or j == 4 or j == 6 or j == 7 or j == 8 or j == 9:
                         sheet.write(row, col, tds[j].string.decode("utf-8"))
                         col += 1
 
